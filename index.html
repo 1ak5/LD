@@ -9,6 +9,8 @@
     <script src="https://apis.google.com/js/api.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <meta name="google-signin-client_id" content="637709229002-0uaqiflhu41koahqpfcgosn36gee5ud5.apps.googleusercontent.com">
+    <meta name="google-signin-cookiepolicy" content="single_host_origin">
+    <meta name="google-signin-scope" content="profile email https://www.googleapis.com/auth/drive.file">
     <style>
         :root {
             --primary: #e2e8f0;
@@ -528,13 +530,13 @@
         <!-- Authentication Section -->
          
         <div class="auth-section" id="authSection">
-            <button class="google-btn" onclick="signInWithGoogle()">
+           <!-- <button class="google-btn" onclick="signInWithGoogle()">
                 <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLCAwLCAwLCAxLCAwLCAwKSI+PHBhdGggZD0iTTIyLjU2IDEyLjI1Yy0uMTItLjc1LS40Ni0xLjQ3LS45OC0yLjAxLS41Mi0uNTQtMS4xNy0uODktMS44OS0xLjAzLS43Mi0uMTQtMS40NS0uMDUtMi4xMS4yNi0uNjYuMzEtMS4yLjgtMS41NiAxLjQyLS4zNi42Mi0uNTQgMS4zMi0uNTQgMi4wMiAwIC43LjE4IDEuNDAuNTQgMi4wMi4zNi42Mi45IDEuMTEgMS41NiAxLjQyLjY2LjMxIDEuMzkuNCAyLjExLjI2LjcyLS4xNCAxLjM3LS40OSAxLjg5LTEuMDMuNTItLjU0Ljg2LTEuMjYuOTgtMi4wMS4xMi0uNzUuMTItMS41MSAwLTIuMjV6IiBmaWxsPSIjNDI4NUY0Ii8+PHBhdGggZD0iTTEyIDIzYzYuMDc1IDAgMTEtNC45MjUgMTEtMTFTMTguMDc1IDEgMTIgMSAxIDUuOTI1IDEgMTJzNC45MjUgMTEgMTEgMTF6bTAtMjBjNC45NyAwIDkgNC4wMyA5IDlzLTQuMDMgOS05IDktOC00LjAzLTktOSA0LjAzLTkgOS05eiIgZmlsbD0iI0ZGQjAwMCIvPjxwYXRoIGQ9Ik0xMiA3LjVjLTIuNDggMC00LjUgMi4wMi00LjUgNC41czIuMDIgNC41IDQuNSA0LjUgNC41LTIuMDIgNC41LTQuNS0yLjAyLTQuNS00LjUtNC41em0wIDdjLTEuMzggMC0yLjUtMS4xMi0yLjUtMi41UzEwLjYyIDkuNSAxMiA5LjVzMi41IDEuMTIgMi41IDIuNS0xLjEyIDIuNS0yLjUgMi41eiIgZmlsbD0iIzM0QTg1MyIvPjxwYXRoIGQ9Ik0xMiA0LjVjLTQuMTQgMC03LjUgMy4zNi03LjUgNy41cy0zLjM2IDcuNSA3LjUgNy41IDcuNS0zLjM2IDcuNS03LjUtMy4zNi03LjUtNy41LTcuNXptMCAxM2MtMy4wNCAwLTUuNS0yLjQ2LTUuNS01LjVzMi40Ni01LjUgNS41LTUuNSA1LjUgMi40NiA1LjUgNS41LTIuNDYgNS41LTUuNSA1LjV6IiBmaWxsPSIjRUE0MzM1Ii8+PC9nPjwvc3ZnPg==" alt="Google Logo">
                 Sign in with Google
             </button>
             <div class="or-divider">
                 <span>OR</span>
-            </div>
+            </div>-->
             <input type="password" id="passwordInput" placeholder="Enter your secret password">
             <button onclick="initializeVault()"><i class="fas fa-unlock"></i> Unlock Vault</button>
         </div>
@@ -626,18 +628,19 @@
                         apiKey: 'AIzaSyDJTRZzhv1o7WnBVXMZP0mHOGggkns189A',
                         clientId: '637709229002-0uaqiflhu41koahqpfcgosn36gee5ud5.apps.googleusercontent.com',
                         scope: 'https://www.googleapis.com/auth/drive.file email profile',
-                        plugin_name: 'Image Vault'
+                        plugin_name: 'Image Vault',
+                        cookiepolicy: 'single_host_origin'
                     });
 
                     // Check if user is already signed in
-                    if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
-                        handleSignIn(gapi.auth2.getAuthInstance().currentUser.get());
+                    const auth2 = gapi.auth2.getAuthInstance();
+                    if (auth2.isSignedIn.get()) {
+                        handleSignIn(auth2.currentUser.get());
                     }
                     
                     console.log('Google API initialized successfully');
                 } catch (error) {
                     console.log('Google Sign-In not available:', error);
-                    // Silently handle the error without showing alert
                 }
             });
         }
