@@ -629,11 +629,11 @@
                 <!-- New backup/import buttons -->
                 <div class="backup-import-container">
                     <button class="backup-btn" onclick="backupImages()">
-                        <i class="fas fa-download"></i> Backup Images
+                        <i class="fas fa-download"></i> Backup
                     </button>
                     <input type="file" id="importInput" accept=".json" hidden onchange="importImages()">
                     <button class="import-btn" onclick="document.getElementById('importInput').click()">
-                        <i class="fas fa-upload"></i> Import Images
+                        <i class="fas fa-upload"></i> Import
                     </button>
                 </div>
             </div>
@@ -1201,7 +1201,7 @@
                 const confirmMessage = document.getElementById('confirmationMessage');
                 const confirmBtn = document.getElementById('confirmButton');
                 
-                confirmMessage.textContent = 'Are you sure you want to delete all images? This action cannot be undone.';
+                confirmMessage.textContent = 'Are you sure you want to delete image? This action cannot be undone.';
                 
                 // Set up the confirm button to delete all images when clicked
                 confirmBtn.onclick = function() {
